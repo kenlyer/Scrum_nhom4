@@ -1,0 +1,385 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\AirlinesReservationSystem-master\\New folder\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\controllers\\ticketmanagerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\ticketmanagerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|d:\\airlinesreservationsystem-master\\new folder\\airlinesreservationsystem\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|d:\\airlinesreservationsystem-master\\new folder\\airlinesreservationsystem\\areas\\admin\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\controllers\\flightschedulescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\flightschedulescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|d:\\airlinesreservationsystem-master\\new folder\\airlinesreservationsystem\\areas\\admin\\views\\flightschedules\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\flightschedules\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\controllers\\defaultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\defaultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\models\\form\\orderticketform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\models\\form\\orderticketform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\models\\airport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\models\\airport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\models\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\models\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\controllers\\securitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\views\\home\\_view.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\views\\home\\_view.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\helper\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\helper\\authhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\views\\flightschedules\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\flightschedules\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\views\\ticketmanagers\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\ticketmanagers\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\views\\shared\\_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\shared\\_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|D:\\AirlinesReservationSystem-master\\New folder\\airlinesreservationsystem\\areas\\admin\\views\\users\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{003934A8-08D6-4847-BD4D-0A58186B2919}|AirlinesReservationSystem\\AirlinesReservationSystem.csproj|solutionrelative:airlinesreservationsystem\\areas\\admin\\views\\users\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAQwBYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:31:46.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TicketManagersController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\TicketManagersController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\TicketManagersController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\TicketManagersController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\TicketManagersController.cs",
+              "ViewState": "AQIAAFUAAAAAAAAAAADwv1wAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:30:33.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACQAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T14:13:55.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Web.config",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Web.config",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Web.config",
+              "RelativeToolTip": "AirlinesReservationSystem\\Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC8AAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-04-03T14:06:01.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAiwFgAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T01:29:07.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SecurityController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\SecurityController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\SecurityController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\SecurityController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\SecurityController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T14:32:19.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AdminAreaRegistration.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T14:32:27.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FlightSchedulesController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\FlightSchedulesController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\FlightSchedulesController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\FlightSchedulesController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\FlightSchedulesController.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAowGsAAADlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T01:42:36.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Create.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Create.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Create.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T01:47:07.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OrderTicketForm.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\Form\\OrderTicketForm.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Models\\Form\\OrderTicketForm.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\Form\\OrderTicketForm.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Models\\Form\\OrderTicketForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T01:37:19.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AirPort.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\AirPort.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Models\\AirPort.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\AirPort.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Models\\AirPort.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T01:37:18.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\AuthController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAYwBIAAAAGAQAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:14:28.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DefaultController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\DefaultController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\DefaultController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Controllers\\DefaultController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Controllers\\DefaultController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABUAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:31:29.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\DataContext.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Models\\DataContext.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Models\\DataContext.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Models\\DataContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T01:37:16.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_View.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Views\\Home\\_View.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Views\\Home\\_View.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Views\\Home\\_View.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Views\\Home\\_View.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T01:29:02.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADgAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T15:46:57.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Delete.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Delete.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Delete.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\FlightSchedules\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T14:30:56.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SecurityController.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Controllers\\SecurityController.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Controllers\\SecurityController.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Controllers\\SecurityController.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Controllers\\SecurityController.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAgwC4AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:17:00.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AuthHelper.cs",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Helper\\AuthHelper.cs",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Helper\\AuthHelper.cs",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Helper\\AuthHelper.cs",
+              "RelativeToolTip": "AirlinesReservationSystem\\Helper\\AuthHelper.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAIA2wBgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T14:26:08.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\TicketManagers\\Delete.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\TicketManagers\\Delete.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\TicketManagers\\Delete.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\TicketManagers\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T14:14:18.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Login.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Login.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Login.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Login.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Shared\\_Login.cshtml",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T14:14:00.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Users\\Delete.cshtml",
+              "RelativeDocumentMoniker": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Users\\Delete.cshtml",
+              "ToolTip": "D:\\AirlinesReservationSystem-master\\New folder\\AirlinesReservationSystem\\Areas\\Admin\\Views\\Users\\Delete.cshtml",
+              "RelativeToolTip": "AirlinesReservationSystem\\Areas\\Admin\\Views\\Users\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-03T14:13:47.158Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
