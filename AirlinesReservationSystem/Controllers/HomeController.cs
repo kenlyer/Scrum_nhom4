@@ -77,39 +77,7 @@ namespace AirlinesReservationSystem.Controllers
             }
             return PartialView(flightSchedule);
         }
-        //Hàm này xử lý thanh toán vé máy bay. Nó kiểm tra xem người dùng đã đăng nhập chưa. Nếu đã đăng nhập, nó tạo một hoặc nhiều vé máy bay dựa trên thông tin được cung cấp và lưu chúng vào cơ sở dữ liệu. Sau đó, nó trả về một thông báo JSON với trạng thái thanh toán.
-        [HttpGet]
-        public ActionResult PayTicket(string ticketID,int flightScheduleID,int amount = 1)
-        {
-            Dictionary<string, string> response = new Dictionary<string, string>();
-            response["status"] = "200";
-            response["message"] = "";
-            if (!AuthHelper.isLogin())
-            {
-                response["status"] = "400";
-                response["message"] = "Phải đăng nhập mới có thể mua được vé.";
-                return Content(JsonConvert.SerializeObject(response));
-            }
-            for (int i = 0; i < amount; i++)
-            {
-                TicketManager ticket = new TicketManager();
-                ticket.user_id = AuthHelper.getIdentity().id;
-                ticket.flight_schedules_id = flightScheduleID;
-                ticket.status = TicketManager.STATUS_PAY;
-                ticket.code = ticketID+""+i.ToString();
-                if (ModelState.IsValid)
-                {
-                    db.TicketManagers.Add(ticket);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    AlertHelper.setToast("danger", "Đặt vé không thành công.");
-                }
-            }
-            AlertHelper.setToast("success", "Đặt vé thành công.");
-            return Content(JsonConvert.SerializeObject(response));
-        }
+  
         //Hàm này hiển thị danh sách vé máy bay của người dùng hiện tại.
         //public ActionResult YourTicket()
         //{
@@ -131,79 +99,8 @@ namespace AirlinesReservationSystem.Controllers
             }
             return PartialView(ticket);
         }
-        //Hàm này hủy một vé máy bay dựa trên ID của vé.
-        public ActionResult CancelTicket(int id)
-        {
-            TicketManager ticket = db.TicketManagers.Where(s => s.id == id).FirstOrDefault();
-            if(ticket == null)
-            {
-                return HttpNotFound();
-            }
-            ticket.status = TicketManager.STATUS_CANCEL;
-            if (ModelState.IsValid)
-            {
-                db.Entry(ticket).State = EntityState.Modified;
-                db.SaveChanges();
-                AlertHelper.setToast("warning", "Hủy vé thành công.");
-            }
-            return RedirectToAction("YourTicket", "Home");
-        }
-       // Hàm này trả về một View để chỉnh sửa thông tin người dùng dựa trên ID được cung cấp.
-        public ActionResult EditUser(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
-        //Hàm này xử lý yêu cầu chỉnh sửa thông tin người dùng. Nó kiểm tra ModelState, sau đó cập nhật thông tin người dùng trong cơ sở dữ liệu và chuyển hướng đến trang chỉnh sửa người dùng.
-        // POST: Admin/Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditUser([Bind(Include = "id,name,email,cccd,address,phone_number,password,user_type")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                AlertHelper.setToast("success", "Cập nhập thông tin khách hàng thành công.");
-                return RedirectToAction("EditUser");
-            }
-            return View(user);
-        }
 
-        // Hàm này xử lý yêu cầu thay đổi mật khẩu của người dùng. Nó kiểm tra mật khẩu cũ, sau đó cập nhật mật khẩu mới trong cơ sở dữ liệu và trả về một thông báo JSON với kết quả.
-        public ActionResult ChangePassword(string old_password,string new_password)
-        {
-            Dictionary<string, string> response = new Dictionary<string, string>();
-            response["status"] = "200";
-            response["message"] = "";
-            User identity = AuthHelper.getIdentity();
-            if(identity.password != old_password)
-            {
-                response["status"] = "400";
-                response["message"] = "Sai thông tin mật khẩu cũ.";
-                return Content(JsonConvert.SerializeObject(response));
-            }
-            User user = db.Users.Find(identity.id);
-            if (user != null) {
-                user.password = new_password;
-                db.SaveChanges();
-                response["status"] = "200";
-                response["message"] = "Đổi mật khẩu thành công.";
-                AlertHelper.setToast("success", "Đổi mật khẩu thành công");
-            }
-            return Content(JsonConvert.SerializeObject(response));
-        }
 
         public ActionResult About()
         {
