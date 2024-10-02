@@ -99,14 +99,10 @@ namespace AirlinesReservationSystem.Controllers
             }
             return PartialView(ticket);
         }
-
-
-
         public ActionResult About()
         {
             return View();
         }
-
         public ActionResult Deals()
         {
             return View();
