@@ -825,3 +825,4 @@ C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesRe
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.csproj.CopyComplete
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.dll
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.pdb
+C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.csproj.AssemblyReference.cache
