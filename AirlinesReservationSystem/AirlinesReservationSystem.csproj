@@ -128,15 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
-    <Compile Include="Areas\Admin\Controllers\FlightSchedulesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TicketManagersController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,10 +265,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\Admin\Views\Default\Index.cshtml" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
@@ -287,11 +275,6 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -325,19 +308,6 @@
     <Content Include="Content\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Content\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="Areas\Admin\Views\FlightSchedules\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\FlightSchedules\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\FlightSchedules\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\FlightSchedules\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\FlightSchedules\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\TicketManagers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TicketManagers\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\TicketManagers\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\TicketManagers\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\TicketManagers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Security\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Security\Login.cshtml" />
     <Content Include="App_Data\2093_flight\fonts\fontawesome-webfont3e6e.eot" />
     <Content Include="App_Data\2093_flight\fonts\fontawesome-webfont3e6e.ttf" />
     <Content Include="App_Data\2093_flight\fonts\fontawesome-webfont3e6e.woff" />
@@ -393,15 +363,10 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\_View.cshtml" />
-    <Content Include="Views\Home\DetailFlightSchedule.cshtml" />
-    <Content Include="Views\Home\YourTicket.cshtml" />
     <Content Include="Views\Home\DetailTicket.cshtml" />
-    <Content Include="Views\Home\EditUser.cshtml" />
     <Content Include="Views\Home\Deals.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Auth\" />
     <Folder Include="Views\Security\" />
   </ItemGroup>
   <ItemGroup>
