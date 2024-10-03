@@ -361,6 +361,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\_View.cshtml" />
     <Content Include="Views\Home\Deals.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Security\" />

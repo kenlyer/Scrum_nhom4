@@ -1,0 +1,179 @@
+﻿@using AirlinesReservationSystem.Models;
+@using AirlinesReservationSystem.Helper;
+@model AirlinesReservationSystem.Models.Form.OrderTicketForm
+
+@{
+    List<FlightSchedule> flightSchedules = ViewBag.flightSchedule ?? null;
+}
+<section class="banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="left-side">
+                    <div class="
+
+                         ">
+
+                    </div>
+                    <div class="tabs-content">
+                        <ul class="social-links">
+                            <li><a href="https://www.facebook.com/ThePinkKitten" target="_blank">Liên hệ qua <em>Facebook</em><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.youtube.com/results?search_query=%40catthepink5298" target="_blank">Kênh <em>Youtube</em> chúng tôi<i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.instagram.com/thepinkkitten" target="_blank">Theo dõi <em>instagram</em><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+
+                    </div>
+                    <div class="page-direction-button">
+                        <a href="@Url.Action("About")"><i class="fa fa-phone"></i>Liên hệ với chúng tôi</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+                <section id="first-tab-group" class="tabgroup">
+                    <div id="tab1" style="display: block;">
+                        <div class="submit-form">
+                            <h4 style="color: red">Chuyến bay:</h4>
+                            @*@using (Html.BeginForm("Index", "Home", FormMethod.Get,
+                                new { @id = "form-submit", @name = "form-submit" }))
+                                                            {*@
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <label for="from">Từ:</label>
+                                        @Html.DropDownList("from", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.from, "", new { @class = "text-danger" })
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <label for="to">Đến:</label>
+                                        @Html.DropDownList("to", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.to, "", new { @class = "text-danger" })
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <label for="departure">Ngày đi:</label>
+                                        @Html.EditorFor(model => model.repartureDate, new { htmlAttributes = new { @class = "form-control date", @type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.repartureDate, "", new { @class = "text-danger" })
+                                    </fieldset>
+                                </div>
+                                @*                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <label for="roundTrip">@Html.CheckBoxFor(model => model.roundTrip, new { @style="margin:0px" }) ROUND-TRIP</label>
+                                            @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control date", @type = "date", @style="opacity:0" } })
+                                            @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
+                                        </fieldset>
+                                    </div>*@
+                                <div class="clearfix"></div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <button type="submit" class="btn btn-warning"><i class="fa fa-search" aria-hidden="true"> Tìm vé</i></button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            @*}*@
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+@if (flightSchedules != null)
+{
+    <div class="container-fluid" style="padding: 50px; background-color: #d1d1d1; ">
+        <h2 class="text-center" style="margin-bottom:30px">Lịch bay</h2>
+        @if (flightSchedules.Count() > 0)
+        {
+            foreach (FlightSchedule model in flightSchedules)
+            {
+                <div class="row" style="padding: 30px; background: #ffffff; margin-bottom: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="col-sm-4 text-center">
+                        <img src="~/Asset/logo.png" alt="logo" width="50px" />
+                        @Html.DisplayFor(modelItem => model.Plane.name)
+                    </div>
+                    <div class="col-sm-4">
+                        <table style="width:100%">
+                            <tr class="text-center">
+                                <td>
+                                    <div>
+                                        @Html.DisplayFor(modelItem => model.departures_at)
+                                        <br><span class="label label-default">@Html.DisplayFor(modelItem => model.AirPort.name)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        -----------
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.DisplayFor(modelItem => model.arrivals_at)
+                                        <br><span class="label label-default">@Html.DisplayFor(modelItem => model.AirPort1.name)</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <span style="font-size:20px;color:red;font-weight:bold">
+                            @MoneyHelper.showVND(model.cost)
+                            /khách
+                        </span><br />
+                        <a class="btn btn-warning" style="width: 30%; border-radius: 8px;" data-toggle="modal" data-target="#detailFlightScheduleModal" data-id="@Html.DisplayFor(modelItem => model.id)">Chọn</a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center">Flight not found.</p>
+        }
+
+    </div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="detailFlightScheduleModal" tabindex="-1" role="dialog" aria-labelledby="detailFlightScheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailFlightScheduleModalLabel">Chi tiết lịch bay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Nội dung modal sẽ được tải vào đây -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#detailFlightScheduleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+        var url = "@Url.Action("DetailFlightSchedule", "Home")";
+        var id = button.attr("data-id");
+        $.ajax({
+            url: url,
+            type: "get",
+            data: {
+                id: id,
+            },
+            dataType: 'html',
+            success: function (response) {
+                modal.find(".modal-content").html(response);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                modal.modal("hide");
+                alert("An error occurred.");
+            }
+        });
+    })
+</script>
