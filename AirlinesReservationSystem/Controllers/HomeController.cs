@@ -60,6 +60,16 @@ namespace AirlinesReservationSystem.Controllers
             }
             return View(_orderTicketForm);
         }
+        //Hàm này trả về thông tin chi tiết của một chuyến bay cụ thể dựa trên ID của chuyến bay.
+        public ActionResult DetailFlightSchedule(int id)
+        {
+            FlightSchedule flightSchedule = db.FlightSchedules.Where(s => s.id == id).FirstOrDefault();
+            if (flightSchedule == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(flightSchedule);
+        }
         public ActionResult About()
         {
             return View();
