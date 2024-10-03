@@ -362,6 +362,7 @@
     <Content Include="Views\Home\_View.cshtml" />
     <Content Include="Views\Home\Deals.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DetailFlightSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Security\" />

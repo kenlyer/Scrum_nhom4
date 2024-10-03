@@ -822,7 +822,6 @@ C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\bin\Newtonsoft.Json.
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\bin\Antlr3.Runtime.pdb
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.csproj.CoreCompileInputs.cache
-C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.csproj.CopyComplete
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.dll
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.pdb
 C:\Users\kiet\Desktop\Scrum_nhom4\AirlinesReservationSystem\obj\Debug\AirlinesReservationSystem.csproj.AssemblyReference.cache
