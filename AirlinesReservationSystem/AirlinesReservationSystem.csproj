@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -363,6 +364,7 @@
     <Content Include="Views\Home\Deals.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DetailFlightSchedule.cshtml" />
+    <Content Include="Views\Home\YourTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Security\" />
