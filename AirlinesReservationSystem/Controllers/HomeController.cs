@@ -124,6 +124,62 @@ namespace AirlinesReservationSystem.Controllers
             }
             return PartialView(ticket);
         }
+        // Hàm này trả về một View để chỉnh sửa thông tin người dùng dựa trên ID được cung cấp.
+        public ActionResult EditUser(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //Hàm này xử lý yêu cầu chỉnh sửa thông tin người dùng. Nó kiểm tra ModelState, sau đó cập nhật thông tin người dùng trong cơ sở dữ liệu và chuyển hướng đến trang chỉnh sửa người dùng.
+        // POST: Admin/Users/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser([Bind(Include = "id,name,email,cccd,address,phone_number,password,user_type")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                AlertHelper.setToast("success", "Cập nhập thông tin khách hàng thành công.");
+                return RedirectToAction("EditUser");
+            }
+            return View(user);
+        }
+        // Hàm này xử lý yêu cầu thay đổi mật khẩu của người dùng. Nó kiểm tra mật khẩu cũ, sau đó cập nhật mật khẩu mới trong cơ sở dữ liệu và trả về một thông báo JSON với kết quả.
+        public ActionResult ChangePassword(string old_password, string new_password)
+        {
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response["status"] = "200";
+            response["message"] = "";
+            User identity = AuthHelper.getIdentity();
+            if (identity.password != old_password)
+            {
+                response["status"] = "400";
+                response["message"] = "Sai thông tin mật khẩu cũ.";
+                return Content(JsonConvert.SerializeObject(response));
+            }
+            User user = db.Users.Find(identity.id);
+            if (user != null)
+            {
+                user.password = new_password;
+                db.SaveChanges();
+                response["status"] = "200";
+                response["message"] = "Đổi mật khẩu thành công.";
+                AlertHelper.setToast("success", "Đổi mật khẩu thành công");
+            }
+            return Content(JsonConvert.SerializeObject(response));
+        }
         public ActionResult About()
         {
             return View();
