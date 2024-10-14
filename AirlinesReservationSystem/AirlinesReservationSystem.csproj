@@ -365,6 +365,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DetailFlightSchedule.cshtml" />
     <Content Include="Views\Home\YourTicket.cshtml" />
+    <Content Include="Views\Home\DetailTicket.cshtml" />
+    <Content Include="Views\Home\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Security\" />
