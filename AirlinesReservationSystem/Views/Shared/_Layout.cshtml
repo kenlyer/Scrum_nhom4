@@ -27,7 +27,7 @@
     <script src="~/Scripts/js/plugins.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     <script src="~/Scripts/custom.js"></script>
-    <link rel="Shortcut Icon" href="~/Asset/img/logo-i.png" type="img/x-icon" />
+    <link rel="Shortcut Icon" href="~/Asset/img/a1.png" type="img/x-icon" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -35,11 +35,11 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="width: 100%; background-color: rgb(0 0 0 / 53%); z-index: 100; height:80px">
-        <nav class="navbar container" style="margin-top: 0px; margin-bottom: 0px; padding:20px">
+    <div class="container-fluid" style="width: 100%; background-color: rgb(0 0 0 / 53%); z-index: 100; height: 60px; position: fixed; backdrop-filter: blur(10px); ">
+        <nav class="navbar container" style="margin-top: 0px; margin-bottom: 0px; padding:5px">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="@Url.Action("Index","Home")"><img src="~/Asset/img/logo.png" alt="Logo"></a>
+                    <a href="@Url.Action("Index","Home")"><img src="~/Asset/logo.png" alt="Logo" width="80" height="50"></a>
 
                 </div>
                 @if (AuthHelper.isLogin() == true)
