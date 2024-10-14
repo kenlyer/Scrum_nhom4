@@ -33,7 +33,16 @@ namespace AirlinesReservationSystem.Controllers
 			}
 			return Content(JsonConvert.SerializeObject(response));
 		}
-
+		//Hàm này xử lý yêu cầu đăng xuất. Nếu người dùng đã đăng nhập, nó gỡ bỏ thông tin xác thực của người dùng khỏi phiên làm việc và trả về một thông báo JSON cho biết đăng xuất thành công.
+		public ActionResult Logout()
+		{
+			if (AuthHelper.isLogin() == true)
+			{
+				AuthHelper.removeIdentity();
+				AlertHelper.setToast("warning", "Đăng xuất thành công.");
+			}
+			return RedirectToAction("Index", "Home");
+		}
 		//Hàm này xử lý yêu cầu đăng ký tài khoản mới. Nó kiểm tra tính hợp lệ của thông tin đăng ký, bao gồm kiểm tra xem mật khẩu và mật khẩu nhập lại có khớp nhau không và kiểm tra xem email đã tồn tại trong cơ sở dữ liệu chưa. Nếu thông tin đăng ký hợp lệ, nó tạo một bản ghi mới trong cơ sở dữ liệu cho người dùng mới và trả về một thông báo JSON cho biết đăng ký thành công. Nếu có lỗi trong quá trình đăng ký, nó trả về một danh sách lỗi JSON để thông báo về các lỗi ModelState.
 		public ActionResult Register(string email, string password, string rePassword)
 		{
