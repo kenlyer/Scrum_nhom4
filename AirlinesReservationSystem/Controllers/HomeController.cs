@@ -70,6 +70,60 @@ namespace AirlinesReservationSystem.Controllers
             }
             return PartialView(flightSchedule);
         }
+        //Hàm này xử lý thanh toán vé máy bay. Nó kiểm tra xem người dùng đã đăng nhập chưa. Nếu đã đăng nhập, nó tạo một hoặc nhiều vé máy bay dựa trên thông tin được cung cấp và lưu chúng vào cơ sở dữ liệu. Sau đó, nó trả về một thông báo JSON với trạng thái thanh toán.
+        [HttpGet]
+        public ActionResult PayTicket(string ticketID, int flightScheduleID, int amount = 1)
+        {
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response["status"] = "200";
+            response["message"] = "";
+            if (!AuthHelper.isLogin())
+            {
+                response["status"] = "400";
+                response["message"] = "Phải đăng nhập mới có thể mua được vé.";
+                return Content(JsonConvert.SerializeObject(response));
+            }
+            for (int i = 0; i < amount; i++)
+            {
+                TicketManager ticket = new TicketManager();
+                ticket.user_id = AuthHelper.getIdentity().id;
+                ticket.flight_schedules_id = flightScheduleID;
+                ticket.status = TicketManager.STATUS_PAY;
+                ticket.code = ticketID + "" + i.ToString();
+                if (ModelState.IsValid)
+                {
+                    db.TicketManagers.Add(ticket);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    AlertHelper.setToast("danger", "Đặt vé không thành công.");
+                }
+            }
+            AlertHelper.setToast("success", "Đặt vé thành công.");
+            return Content(JsonConvert.SerializeObject(response));
+        }
+        //Hàm này hiển thị danh sách vé máy bay của người dùng hiện tại.
+        public ActionResult YourTicket()
+        {
+            if (!AuthHelper.isLogin())
+            {
+                return RedirectToAction("Index");
+            }
+            User user = AuthHelper.getIdentity();
+            IEnumerable<TicketManager> ticketManagers = db.TicketManagers.Where(s => s.user_id == user.id).ToList();
+            return View(ticketManagers);
+        }
+        // Hàm này trả về thông tin chi tiết của một vé máy bay cụ thể dựa trên ID của vé.
+        public ActionResult DetailTicket(int id)
+        {
+            TicketManager ticket = db.TicketManagers.Where(s => s.id == id).FirstOrDefault();
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(ticket);
+        }
         public ActionResult About()
         {
             return View();
@@ -78,5 +132,8 @@ namespace AirlinesReservationSystem.Controllers
         {
             return View();
         }
+
+
+
     }
 }

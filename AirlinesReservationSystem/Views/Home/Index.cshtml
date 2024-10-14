@@ -33,9 +33,9 @@
                     <div id="tab1" style="display: block;">
                         <div class="submit-form">
                             <h4 style="color: red">Chuyến bay:</h4>
-                            @*@using (Html.BeginForm("Index", "Home", FormMethod.Get,
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get,
                                 new { @id = "form-submit", @name = "form-submit" }))
-                                                            {*@
+                                                            {
                             @Html.AntiForgeryToken()
                             <div class="row">
                                 <div class="col-md-6">
@@ -73,7 +73,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                            @*}*@
+                            }
                         </div>
                     </div>
                 </section>
