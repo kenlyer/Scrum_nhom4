@@ -32,6 +32,11 @@
     </div>
 
     <div class="form-group">
+        <label for="email">Seats :</label>
+        <input type="text" class="form-control" id="email" value="@Html.DisplayFor(modelItem => Model.seat_location)" readonly>
+    </div>
+
+    <div class="form-group">
         <label for="email">Price: <span>@MoneyHelper.showVND(Model.FlightSchedule.cost)</span></label>
     </div>
     <div class="form-group">

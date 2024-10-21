@@ -269,5 +269,20 @@ ADD seat_location INT;
 alter table [dbo].[TicketManager]
 ADD pay_id Int;
 
-
-
+---Seat table 
+Create table [dbo].[Seats](
+	[id] [int] IDENTITY(1,1) primary key NOT NULL,
+	[flight_schedules_id] [int] NOT NULL,
+	[seat] [nvarchar](255) NULL,
+	[isbooked] [int] NULL,
+)
+ALTER TABLE [dbo].[Seats]  WITH CHECK ADD  CONSTRAINT [FK_Seats_FlightSchedules] FOREIGN KEY([flight_schedules_id])
+REFERENCES [dbo].[FlightSchedules] ([id])
+---Payment 
+Create table [dbo].[Payments](
+	[id] [int] IDENTITY(1,1) primary key NOT NULL ,
+	[email_Payment] [nvarchar](255) NULL,
+	[name_Payment] [nvarchar](255) NULL,
+	[PayerID_Payment] [nvarchar](255) NULL,
+	[UserID] [int] NULL
+)

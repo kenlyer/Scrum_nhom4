@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AirlinesReservationSystem.Models.Payments>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header">
+            <b>@ViewBag.Title</b>
+        </div>
+        <div class="card-body table-responsive">
+            <a href="@Url.Action("Create")" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Thêm dữ liệu</a>
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.email_Payment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name_Payment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PayerID_Payment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserID)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email_Payment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name_Payment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PayerID_Payment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit",new { id = item.id })"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Details",new { id = item.id })"><i class="fa fa-book" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Delete",new { id = item.id })">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+

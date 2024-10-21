@@ -49,7 +49,7 @@
         [DisplayName("To")]
         public virtual AirPort AirPort1 { get; set; }
 
-        [Range(21, 33, ErrorMessage = "Số lượng vé phải lớn hơn 20 và nhỏ hơn 34")]
+        [Range(20, 30, ErrorMessage = "Số lượng vé phải lớn hơn 20 và nhỏ hơn 30")]
         [DisplayName("Số lượng chỗ")]
         public int totalSeats { get; set; }
 

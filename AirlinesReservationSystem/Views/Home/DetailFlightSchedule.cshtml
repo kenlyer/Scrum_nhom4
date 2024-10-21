@@ -1,5 +1,13 @@
 ﻿@using AirlinesReservationSystem.Helper;
 @model AirlinesReservationSystem.Models.FlightSchedule
+
+@{
+
+    var seats = ViewData["seatData"] as List<AirlinesReservationSystem.Models.Seats>;
+    int totalSeats = 30;
+    int rows = 4; // Số hàng
+    int cols = totalSeats / rows; // Số cột
+}
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title"><img src="~/Asset/logo.png" style="height:50px"><span>HN_PQ_200_@DateTimeOffset.Now.ToUnixTimeSeconds()</span></h4>
@@ -31,46 +39,152 @@
 
     <div class="form-group">
         <label for="email">Số lượng:</label>
-        <input type="number" min="1" class="form-control" id="email" value="1">
+        <input type="number" min="0" class="form-control" id="numberticket" value="0" readonly>
     </div>
 
     <div class="form-group">
         <label>Giá : <span name="cost">@MoneyHelper.showVND(Model.cost)</span></label>
     </div>
 
+    @if (seats != null && totalSeats > 0)
+    {
+        <table border="1" style="width:100%; text-align:center; table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th colspan="@rows">Seats</th> <!-- Header -->
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < rows; i++)  // Vòng lặp tạo các hàng
+                {
+                    <tr>
+                        @for (int j = i; j < totalSeats; j += rows) // Vòng lặp tạo các cột
+                        {
+                            if (seats[j].isbooked == 0)
+                            {
+                                <td style="width:50px; height:50px; text-align:center; background-color:green">@seats[j].seat <input type="checkbox" id="@seats[j].seat" value="@seats[j].seat" onclick="seat(this)"> </td>
+                                <!-- Thay thế SeatNumber bằng thuộc tính chính xác -->
+                            }
+                            else
+                            {
+                                <td style="width: 50px; height: 50px; text-align: center; background-color: red">@seats[j].seat </td>
+                            }
+                        }
+                    </tr>
+}
+            </tbody>
+        </table> }
+    else
+    {
+        <p>No seats available</p>}
+
+    <div class="form-group">
+    </div>
+
+    <div class="form-group">
+        <label for="seatlocal">Vị trí ngồi:</label>
+        <input type="text" class="form-control" id="seatlocal" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="totalcost">Tổng tiền:</label>
+        <label>Giá : <span id="totalcosts"></span></label>
+    </div>
+
+    <div class="form-group">
+    </div>
+
     <div class="text-center">
-        <button class="btn btn-warning" data-id="@Model.id" style="padding: 10px 50px;"><i class="fa fa-usd" aria-hidden="true"></i> Pay</button>
+        <button class="btn btn-warning" data-id="@Model.id" style="padding: 10px 50px;"><i class="fa fa-usd" aria-hidden="true"></i> Đặt </button>
+       
     </div>
 </div>
 <div class="modal-footer">
     <p class="text-center"><b>Note:</b> You must be at the airport 30 minutes before departure time</p>
 </div>
+
+
+
+
 <script>
-    $(document).on("change", "#detailFlightScheduleModal input[type=number]", function () {
-        var price = $(this).val() * @Model.cost;
-        $("#detailFlightScheduleModal span[name=cost]").html(price.toLocaleString('vi', { style: 'currency', currency: 'VND' }));
-    });
-        $(document).on("click", "#detailFlightScheduleModal button", function () {
-        var id = $(this).attr("data-id");
-        var ticketID = $(this).closest(".modal-content").find(".modal-header h4 span").text();
-            var url = "@Url.Action("PayTicket", "Home")";
-            var count = $("#detailFlightScheduleModal input[type=number]").val();
-        $.ajax({
-            url: url,
-            type: "get",
-            data: {
-                ticketID: ticketID,
-                flightScheduleID: parseInt(id),
-                amount: parseInt(count),
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.status == "200") {
-                    window.location.href = "@Url.Action("Index","Home")";
-                } else {
-                    alert(response.message);
-                }
+    let selectedSeats = [];
+
+    function seat(me) {
+        var a = document.getElementById(me.id);
+        var numberticket = document.getElementById("numberticket");
+        var totalcost = document.getElementById("totalcosts");
+        var seatlocal = document.getElementById("seatlocal");
+        let currentValue = parseInt(numberticket.value);
+        var price = 0;
+
+
+        if (a.checked == true) {
+            if (!selectedSeats.includes(a.value)) {
+                selectedSeats.push(a.value);
             }
+            numberticket.value = currentValue + 1;
+            price = numberticket.value * @Model.cost;
+            totalcost.innerHTML = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            seatlocal.value = selectedSeats.join(",");
+            console.log(selectedSeats);
+            //alert('dang chon');
+        }
+        else {
+            selectedSeats = selectedSeats.filter(seat => seat != a.value);
+            numberticket.value = currentValue - 1;
+            price = numberticket.value * @Model.cost;
+            totalcost.innerHTML = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            seatlocal.value = selectedSeats.join(",");
+            console.log(selectedSeats);
+            //alert('dang bo');
+        }
+        
+    }
+
+
+
+
+        $(document).on("click", "#detailFlightScheduleModal button", function () {
+            var id = $(this).attr("data-id");
+            var ticketID = $(this).closest(".modal-content").find(".modal-header h4 span").text();
+                var url = "@Url.Action("Pays", "Home")";
+                var count = $("#detailFlightScheduleModal input[type=number]").val();
+            var SLseats = document.getElementById("seatlocal").value;
+            $.ajax({
+                url: url,
+                type: "post",
+                data: {
+                    ticketID: ticketID,
+                    flight: parseInt(id),
+                    amount: parseInt(count),
+                    seats: SLseats,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status == "200") {
+                        window.location.href = "@Url.Action("PayYourTicket", "Home")";
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
         });
-    });
+
+
+
+
 </script>
+
+
+
+
+
+<script>
+        @*$(document).on("change", "#detailFlightScheduleModal input[type=number]", function () {
+            var price = $(this).val() * @Model.cost;
+            $("#detailFlightScheduleModal span[name=cost]").html(price.toLocaleString('vi', { style: 'currency', currency: 'VND' }));
+        });*@
+
+
+
+    </script>
