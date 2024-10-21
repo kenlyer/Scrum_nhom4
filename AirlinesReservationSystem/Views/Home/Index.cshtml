@@ -11,7 +11,7 @@
             <div class="col-md-5">
                 <div class="left-side">
                     <div class="
-
+                         
                          ">
 
                     </div>
@@ -34,45 +34,45 @@
                         <div class="submit-form">
                             <h4 style="color: red">Chuyến bay:</h4>
                             @using (Html.BeginForm("Index", "Home", FormMethod.Get,
-                                new { @id = "form-submit", @name = "form-submit" }))
-                                                            {
-                            @Html.AntiForgeryToken()
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <label for="from">Từ:</label>
-                                        @Html.DropDownList("from", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.from, "", new { @class = "text-danger" })
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <label for="to">Đến:</label>
-                                        @Html.DropDownList("to", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.to, "", new { @class = "text-danger" })
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <label for="departure">Ngày đi:</label>
-                                        @Html.EditorFor(model => model.repartureDate, new { htmlAttributes = new { @class = "form-control date", @type = "date" } })
-                                        @Html.ValidationMessageFor(model => model.repartureDate, "", new { @class = "text-danger" })
-                                    </fieldset>
-                                </div>
-                                @*                                    <div class="col-md-6">
+new { @id = "form-submit", @name = "form-submit" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <fieldset>
-                                            <label for="roundTrip">@Html.CheckBoxFor(model => model.roundTrip, new { @style="margin:0px" }) ROUND-TRIP</label>
-                                            @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control date", @type = "date", @style="opacity:0" } })
-                                            @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
+                                            <label for="from">Từ:</label>
+                                            @Html.DropDownList("from", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.from, "", new { @class = "text-danger" })
                                         </fieldset>
-                                    </div>*@
-                                <div class="clearfix"></div>
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <button type="submit" class="btn btn-warning"><i class="fa fa-search" aria-hidden="true"> Tìm vé</i></button>
-                                    </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <label for="to">Đến:</label>
+                                            @Html.DropDownList("to", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.to, "", new { @class = "text-danger" })
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <label for="departure">Ngày đi:</label>
+                                            @Html.EditorFor(model => model.repartureDate, new { htmlAttributes = new { @class = "form-control date", @type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.repartureDate, "", new { @class = "text-danger" })
+                                        </fieldset>
+                                    </div>
+                                    @*                                    <div class="col-md-6">
+                                            <fieldset>
+                                                <label for="roundTrip">@Html.CheckBoxFor(model => model.roundTrip, new { @style="margin:0px" }) ROUND-TRIP</label>
+                                                @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control date", @type = "date", @style="opacity:0" } })
+                                                @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
+                                            </fieldset>
+                                        </div>*@
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <button type="submit" class="btn btn-warning"><i class="fa fa-search" aria-hidden="true"> Tìm vé</i></button>
+                                        </fieldset>
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                             @MoneyHelper.showVND(model.cost)
                             /khách
                         </span><br />
-                        <a class="btn btn-warning" style="width: 30%; border-radius: 8px;" data-toggle="modal" data-target="#detailFlightScheduleModal" data-id="@Html.DisplayFor(modelItem => model.id)">Chọn</a>
+                        <a  class="btn btn-warning" style="width: 30%; border-radius: 8px;" data-toggle="modal" data-target="#detailFlightScheduleModal" data-id="@Html.DisplayFor(modelItem => model.id)">Chọn</a>
                     </div>
                 </div>
             }
@@ -153,8 +153,8 @@
             </div>
         </div>
     </div>
-</div>
-<script>
+  </div>
+    <script>
     $('#detailFlightScheduleModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var modal = $(this)
@@ -176,4 +176,4 @@
             }
         });
     })
-</script>
+    </script>

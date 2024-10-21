@@ -14,6 +14,7 @@
         public const int STATUS_PAY = 0;
         public const int STATUS_CANCEL = 1;
 
+
         [DisplayName("ID")]
         public int id { get; set; }
 
@@ -23,11 +24,18 @@
         [DisplayName("User")]
         public int user_id { get; set; }
 
+        [Range(0, 1, ErrorMessage = "sai mã trạng thái")]
         [DisplayName("Trạng thái")]
         public int status { get; set; }
 
         [DisplayName("Mã")]
-        public string code { get; set; }
+        public string code { get; set; }    
+
+        [DisplayName("Vị trí")]
+        public int? seat_location { get; set; }
+
+        [DisplayName("Mã thanh toán")]
+        public int? pay_id { get; set; }
 
         public virtual FlightSchedule FlightSchedule { get; set; }
 

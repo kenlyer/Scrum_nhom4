@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "SuccessView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="height:50vh">
+    <div class="card container w-50 h-100 text-center d-flex">
+        <div style="padding:8%;">
+            <div class="fw-bold" style="font-size:30px">THANH TOÁN THÀNH CÔNG</div>
+            <div style="font-size:100px"><i class="fa-solid fa-circle-check" style="color: #0b936a;"></i></div>
+            <div class="fw-bold">Chúc mừng bạn đã thanh toán tiền vé thành công!</div>
+            <div><a class="btn btn-success w-25 mt-2" href="@Url.Action("YourTicket","Home")">Xem Lịch Sử Đặt Vé</a></div>
+        </div>
+    </div>
+</div>
+

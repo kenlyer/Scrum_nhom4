@@ -1,0 +1,55 @@
+﻿@model AirlinesReservationSystem.Models.Payments
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Payments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_Payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_Payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name_Payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_Payment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PayerID_Payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayerID_Payment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

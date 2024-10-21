@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+ 
 <div class="container">
     <div class="panel panel-default" style="margin-top:30px">
         <div class="panel-heading"><h2>Vé của tôi</h2></div>
@@ -24,33 +24,39 @@
                     <th>
                         Mã vé
                     </th>
+                    <th>
+                        Chỗ ngồi
+                    </th>
                     <th></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FlightSchedule.code)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.email)
-                        </td>
-                        <td>
-                            <span class="label label-@item.getLabelStatus()">@item.getStatus()</span>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightSchedule.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.email)
+                </td>
+                <td>
+                    <span class="label label-@item.getLabelStatus()">@item.getStatus()</span>
 
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.code)
-                        </td>
-                        <td>
-                            <a title="Detail Ticket" data-toggle="modal" data-target="#detailTickModal" data-id="@item.id"><i class="fa fa-eye" aria-hidden="true"></i> |</a>
-                            @if (!item.isCancel())
-                            {
-                                <a title="Cancel Ticket" data-id="@item.id" href="@Url.Action("CancelTicket","Home",new { @id = item.id})" data-confirm="Are your sure canecl ticket?"><i class="fa fa-ban" aria-hidden="true"></i></a>
-                            }
-                        </td>
-                    </tr>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.seat_location)
+                </td>
+                <td>
+                    <a title="Detail Ticket" data-toggle="modal" data-target="#detailTickModal" data-id="@item.id"><i class="fa fa-eye" aria-hidden="true"></i> |</a>
+                    @*@if (!item.isCancel())
+            {
+                <a title="Cancel Ticket" data-id="@item.id" href="@Url.Action("CancelTicket","Home",new { @id = item.id})" data-confirm="Are your sure canecl ticket?"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            }*@
+                </td>
+            </tr>
                 }
             </table>
         </div>

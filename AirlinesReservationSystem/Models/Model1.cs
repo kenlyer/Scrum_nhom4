@@ -18,7 +18,9 @@ namespace AirlinesReservationSystem.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TicketManager> TicketManagers { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Seats> Seats { get; set; }
 
+        public virtual DbSet<Payments> Payments { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AirPort>()
@@ -50,6 +52,9 @@ namespace AirlinesReservationSystem.Models
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.user_id)
                 .WillCascadeOnDelete(false);
+
+
+
         }
     }
 }
