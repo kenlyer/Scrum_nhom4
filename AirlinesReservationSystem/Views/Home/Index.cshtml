@@ -105,13 +105,25 @@ new { @id = "form-submit", @name = "form-submit" }))
                                 </td>
                                 <td>
                                     <div>
-                                        -----------
+                                        -
                                     </div>
                                 </td>
                                 <td>
                                     <div>
                                         @Html.DisplayFor(modelItem => model.arrivals_at)
                                         <br><span class="label label-default">@Html.DisplayFor(modelItem => model.AirPort1.name)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        -
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.DisplayFor(modelItem => model.bookedSeats) / @Html.DisplayFor(modelItem => model.totalSeats)
+                                        
+                                        <span class="label label-default">SỐ LƯỢNG CHỖ ĐẶT</span>
                                     </div>
                                 </td>
                             </tr>
