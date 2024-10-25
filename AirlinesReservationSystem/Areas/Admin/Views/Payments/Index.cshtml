@@ -12,57 +12,81 @@
         </div>
         <div class="card-body table-responsive">
             <a href="@Url.Action("Create")" class="btn btn-primary mb-3"><i class="fa fa-plus" aria-hidden="true"></i> Thêm dữ liệu</a>
-            <table class="table table-striped">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.email_Payment)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.name_Payment)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PayerID_Payment)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserID)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
+            <table id="exdatatable" class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.email_Payment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name_Payment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PayerID_Payment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserID)
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Edit",new { id = item.id })"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-                            <a href="@Url.Action("Details",new { id = item.id })"><i class="fa fa-book" aria-hidden="true"></i></a> |
-                            <a href="@Url.Action("Delete",new { id = item.id })">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email_Payment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.name_Payment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PayerID_Payment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserID)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-
+                </thead>
+                <tbody style="text-align:center">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email_Payment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name_Payment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PayerID_Payment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserID)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit",new { id = item.id })"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                                <a href="@Url.Action("Details",new { id = item.id })"><i class="fa fa-book" aria-hidden="true"></i></a> |
+                                <a href="@Url.Action("Delete",new { id = item.id })">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
             </table>
 
         </div>
     </div>
 </div>
 
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            $("#exdatatable").DataTable();
+        }
+        );
+    </script>
+
+}

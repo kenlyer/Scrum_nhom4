@@ -270,6 +270,7 @@
     <Compile Include="Models\Payments.cs" />
     <Compile Include="Models\PaypalConfiguration.cs" />
     <Compile Include="Models\Plane.cs" />
+    <Compile Include="Models\RegisterAccount.cs" />
     <Compile Include="Models\Seats.cs" />
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TicketManager.cs" />
@@ -526,6 +527,7 @@
     <Content Include="Views\Home\Deals.cshtml" />
     <Content Include="Views\Home\PayYourTicket.cshtml" />
     <Content Include="Views\Home\SuccessView.cshtml" />
+    <Content Include="Views\Home\FailureView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
