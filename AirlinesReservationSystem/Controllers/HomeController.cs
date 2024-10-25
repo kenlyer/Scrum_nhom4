@@ -12,12 +12,24 @@ using System.Data.Entity;
 using System.Net;
 using PayPal.Api;
 using System.Globalization;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AirlinesReservationSystem.Controllers
 {
     public class HomeController : Controller
     {
         private Model1 db = new Model1();
+        private readonly string apiUrl = "https://localhost:44371/api/";
+        Uri baseAddress = new Uri("https://localhost:44371/api/");
+        private readonly HttpClient _client;
+        public HomeController()
+        {
+            _client = new HttpClient();
+            _client.BaseAddress = baseAddress;
+
+        }
+
 
         [HttpGet]
         //[ValidateAntiForgeryToken]
@@ -29,13 +41,18 @@ namespace AirlinesReservationSystem.Controllers
             return PartialView();
         }
         //Hàm này xử lý yêu cầu tìm kiếm vé máy bay. Nó hiển thị danh sách sân bay xuất phát và đến thông qua ViewBag, sau đó kiểm tra nếu yêu cầu có dữ liệu và ModelState hợp lệ. Nếu hợp lệ, nó kiểm tra các điều kiện về điểm đến và điểm xuất phát, sau đó truy vấn cơ sở dữ liệu để lấy danh sách các chuyến bay phù hợp và trả về chúng dưới dạng View. Nếu không, nó trả về View với _orderTicketForm.
-        public ActionResult Index(OrderTicketForm _orderTicketForm)
+        [HttpGet]
+        public async Task<ActionResult> Index(OrderTicketForm _orderTicketForm)
         {
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response["status"] = "200";
+            response["message"] = "";
+            _orderTicketForm.repartureDate = "%20" + _orderTicketForm.repartureDate;
             ViewBag.from = new SelectList(db.AirPorts, "id", "code");
             ViewBag.to = new SelectList(db.AirPorts, "id", "code");
             ViewBag.flightSchedule = null;
             ViewBag.title = "Search Ticket";
-            if(Request.QueryString.Count > 0)
+            if (Request.QueryString.Count > 0)
             {
                 if (ModelState.IsValid)
                 {
@@ -48,16 +65,52 @@ namespace AirlinesReservationSystem.Controllers
                         flagError = true;
                     }
 
-                    if(flagError == false)
+                    if (flagError == false)
                     {
+                        try
+                        {
+                            using (var client = new HttpClient())
+                            {
+                                client.BaseAddress = new Uri(apiUrl);
+
+                                var responses = await client.GetAsync($"FlightSchedules/getScheduleOrder/{_orderTicketForm.from},{_orderTicketForm.to},{ _orderTicketForm.repartureDate.Trim()},{"%20%20"}");
+
+                                if (responses.IsSuccessStatusCode)
+                                {
+                                    var content = await responses.Content.ReadAsStringAsync();
+                                    List<FlightSchedule> flightSchedules = JsonConvert.DeserializeObject<List<FlightSchedule>>(content);
+                                    ViewBag.flightSchedule = flightSchedules;
+                                    return View(_orderTicketForm);
+                                    //AuthHelper.setIdentity(user);
+                                    //AlertHelper.setToast("success", "Đăng nhập thành công.");
+                                    //return View("UserProfile", user);
+                                }
+                                else
+                                {
+                                    response["status"] = "400";
+                                    response["message"] = "Lỗi xảy ra.";
+                                    //ViewBag.ErrorMessage = "Invalid login credentials.";
+
+                                }
+                            }
+                            return Content(JsonConvert.SerializeObject(response));
+                        }
+                        catch (Exception ex)
+                        {
+                            response["status"] = "400";
+                            response["message"] = "Lỗi xảy ra.";
+                        }
+
+
+
+
                         //Lấy danh sach chuyến bay phù hợp vs thời gian.
-                        
-                        var query = db.FlightSchedules.Where(s => s.to_airport == _orderTicketForm.to && s.from_airport == _orderTicketForm.from);
-                        DateTime repartureDate = DateTime.Parse(_orderTicketForm.repartureDate);
-                        query = query.Where(s => EntityFunctions.TruncateTime(s.departures_at) == EntityFunctions.TruncateTime(repartureDate));
-                        List<FlightSchedule> models = query.ToList();
-                        ViewBag.flightSchedule = models;
-                        return View(_orderTicketForm);
+                        //var query = db.FlightSchedules.Where(s => s.to_airport == _orderTicketForm.to && s.from_airport == _orderTicketForm.from);
+                        //DateTime repartureDate = DateTime.Parse(_orderTicketForm.repartureDate);
+                        //query = query.Where(s => EntityFunctions.TruncateTime(s.departures_at) == EntityFunctions.TruncateTime(repartureDate));
+                        //List<FlightSchedule> models = query.ToList();
+                        //ViewBag.flightSchedule = models;
+                        //return View(_orderTicketForm);
                     }
 
                 }
@@ -70,25 +123,70 @@ namespace AirlinesReservationSystem.Controllers
         }
 
         //Hàm này trả về thông tin chi tiết của một chuyến bay cụ thể dựa trên ID của chuyến bay.
-        public ActionResult DetailFlightSchedule(int id)
+        [HttpGet]
+        public async Task<ActionResult> DetailFlightSchedule(int id)
         {
-            FlightSchedule flightSchedule = db.FlightSchedules.Where(s => s.id == id).FirstOrDefault();
-            List<Seats> seats = db.Seats.Where(s => s.flight_schedules_id == id).ToList();
-            ViewData["seatData"] = seats;
-
-            if(flightSchedule == null)
+            FlightSchedule flightSchedules = db.FlightSchedules.Where(s => s.id == id).FirstOrDefault();
+            FlightSchedule flightSchedule = new FlightSchedule();
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response["status"] = "200";
+            response["message"] = "";
+            try
             {
-                return HttpNotFound();
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+
+
+                    var responses = client.GetAsync($"FlightSchedules/DetailFlightSchedule/{id}").Result;
+
+                    if (responses.IsSuccessStatusCode)
+                    {
+                        var content = await responses.Content.ReadAsStringAsync();
+                        flightSchedule = JsonConvert.DeserializeObject<FlightSchedule>(content);
+                        List<Seats> seats = db.Seats.Where(s => s.flight_schedules_id == id).ToList();
+                        ViewData["seatData"] = seats;
+                        return PartialView(flightSchedule);
+                        //List<FlightSchedule> flightSchedules = JsonConvert.DeserializeObject<List<FlightSchedule>>(content);
+
+                    }
+                    else
+                    {
+
+                        response["status"] = "400";
+                        response["message"] = "Lỗi mất kết nối với dữ liệu.";
+                        return Content(JsonConvert.SerializeObject(response));
+                        //ViewBag.ErrorMessage = "Invalid login credentials.";
+
+                    }
+                }
+                return Content(JsonConvert.SerializeObject(response));
             }
+            catch (Exception ex)
+            {
+                response["status"] = "400";
+                response["message"] = "Lỗi mất kết nối với dữ liệu.";
+                return Content(JsonConvert.SerializeObject(response));
+
+            }
+
+
+            if (flightSchedule == null)
+            {
+                response["status"] = "400";
+                response["message"] = "Lỗi mất kết nối với dữ liệu.";
+                return Content(JsonConvert.SerializeObject(response));
+            }
+
             return PartialView(flightSchedule);
         }
         [HttpPost]
-        public ActionResult Pays(string ticketID , int flight , int amount , String seats)
+        public ActionResult Pays(string ticketID, int flight, int amount, String seats)
         {
 
             List<TicketManager> lstTicket = new List<TicketManager>();
             FlightSchedule flights = db.FlightSchedules.FirstOrDefault(x => x.id == flight);
-            int amountTicket = Int32.Parse( flights.cost.ToString()) * amount;
+            int amountTicket = Int32.Parse(flights.cost.ToString()) * amount;
             int amountTicketSingle = Int32.Parse(flights.cost.ToString());
             string[] seatArray = seats.Split(',');
             bool checkticket = CheckLocalSeats(flight, seats);
@@ -102,13 +200,13 @@ namespace AirlinesReservationSystem.Controllers
                 response["message"] = "Phải đăng nhập mới có thể mua được vé.";
                 return Content(JsonConvert.SerializeObject(response));
             }
-            if(amount == 0)
+            if (amount == 0)
             {
                 response["status"] = "400";
                 response["message"] = "Bạn phải mua ít nhất 1 vé.";
                 return Content(JsonConvert.SerializeObject(response));
             }
-            if(checkticket == false)
+            if (checkticket == false)
             {
                 response["status"] = "400";
                 response["message"] = "Chỗ ngồi bạn đặt đã có người đặt rồi.";
@@ -123,7 +221,7 @@ namespace AirlinesReservationSystem.Controllers
                 ticket.flight_schedules_id = flight;
                 ticket.status = TicketManager.STATUS_PAY;
                 ticket.code = ticketID + "" + i.ToString();
-                ticket.seat_location = Int32.Parse( seatArray[i]);
+                ticket.seat_location = Int32.Parse(seatArray[i]);
 
                 lstTicket.Add(ticket);
 
@@ -221,7 +319,7 @@ namespace AirlinesReservationSystem.Controllers
         public ActionResult CancelTicket(int id)
         {
             TicketManager ticket = db.TicketManagers.Where(s => s.id == id).FirstOrDefault();
-            if(ticket == null)
+            if (ticket == null)
             {
                 return HttpNotFound();
             }
@@ -234,7 +332,7 @@ namespace AirlinesReservationSystem.Controllers
             }
             return RedirectToAction("YourTicket", "Home");
         }
-       // Hàm này trả về một View để chỉnh sửa thông tin người dùng dựa trên ID được cung cấp.
+        // Hàm này trả về một View để chỉnh sửa thông tin người dùng dựa trên ID được cung cấp.
         public ActionResult EditUser(int? id)
         {
             if (id == null)
@@ -268,20 +366,21 @@ namespace AirlinesReservationSystem.Controllers
         }
 
         // Hàm này xử lý yêu cầu thay đổi mật khẩu của người dùng. Nó kiểm tra mật khẩu cũ, sau đó cập nhật mật khẩu mới trong cơ sở dữ liệu và trả về một thông báo JSON với kết quả.
-        public ActionResult ChangePassword(string old_password,string new_password)
+        public ActionResult ChangePassword(string old_password, string new_password)
         {
             Dictionary<string, string> response = new Dictionary<string, string>();
             response["status"] = "200";
             response["message"] = "";
             User identity = AuthHelper.getIdentity();
-            if(identity.password != old_password)
+            if (identity.password != old_password)
             {
                 response["status"] = "400";
                 response["message"] = "Sai thông tin mật khẩu cũ.";
                 return Content(JsonConvert.SerializeObject(response));
             }
             User user = db.Users.Find(identity.id);
-            if (user != null) {
+            if (user != null)
+            {
                 user.password = new_password;
                 db.SaveChanges();
                 response["status"] = "200";
@@ -292,7 +391,7 @@ namespace AirlinesReservationSystem.Controllers
         }
         /// PAYPAL
         /// 
-        public ActionResult PaymentWithPaypal(string Cancel = null  )
+        public ActionResult PaymentWithPaypal(string Cancel = null)
         {
             Payments payments = new Payments();
             //getting the apiContext  
@@ -315,7 +414,7 @@ namespace AirlinesReservationSystem.Controllers
                     //CreatePayment function gives us the payment approval url  
                     //on which payer is redirected for paypal account payment  
                     var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
-                    
+
                     //get links returned from paypal in response to Create function call  
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = null;
@@ -362,7 +461,7 @@ namespace AirlinesReservationSystem.Controllers
             db.SaveChanges();
 
             Payments payments1 = db.Payments.FirstOrDefault(x => x.email_Payment == payments.email_Payment && x.PayerID_Payment == payments.PayerID_Payment);
-            
+
 
 
 
@@ -373,9 +472,14 @@ namespace AirlinesReservationSystem.Controllers
                 //updated seat 
                 Seats seat = db.Seats.FirstOrDefault(x => (x.flight_schedules_id == item.flight_schedules_id && x.seat == item.seat_location.ToString()));
                 seat.isbooked = 1;
+                //update booked
+                FlightSchedule flight = db.FlightSchedules.FirstOrDefault(x =>  x.id == item.flight_schedules_id);
+                flight.bookedSeats += 1;
+
                 db.Entry(seat).State = EntityState.Modified;
+                db.Entry(flight).State = EntityState.Modified;
             }
-            
+
             db.SaveChanges();
 
             AlertHelper.setToast("success", "Đặt vé thành công.");
@@ -384,6 +488,10 @@ namespace AirlinesReservationSystem.Controllers
             return View("SuccessView");
         }
         public ActionResult SuccessView()
+        {
+            return View();
+        }
+        public ActionResult FailureView()
         {
             return View();
         }
@@ -410,7 +518,7 @@ namespace AirlinesReservationSystem.Controllers
             int price = (int)Session["amountTicket"];
             int priceSingle = (int)Session["amountTicketSingle"];
 
-            double convertUSD = Math.Round( (double)price / 25380, 2);
+            double convertUSD = Math.Round((double)price / 25380, 2);
             double convertUSDSingle = Math.Round((double)priceSingle / 25380, 2);
 
 
@@ -421,11 +529,11 @@ namespace AirlinesReservationSystem.Controllers
             };
             //Adding Item Details like name, currency, price etc  
 
-            foreach(var item in itemsTicket)
+            foreach (var item in itemsTicket)
             {
                 itemList.items.Add(new Item()
                 {
-                    name = "don ve may bay "+item.code,
+                    name = "don ve may bay " + item.code,
                     currency = "USD",
                     price = convertUSDSingle.ToString(),
                     quantity = "1",
@@ -545,15 +653,15 @@ namespace AirlinesReservationSystem.Controllers
             //return this.payment.Create(apiContext);
         }
 
-        public bool CheckLocalSeats( int flightschedule , String seats )
+        public bool CheckLocalSeats(int flightschedule, String seats)
         {
-            if(seats == null || seats =="")
+            if (seats == null || seats == "")
             {
                 return false;
             }
             string[] seatArray = seats.Split(',');
             bool checkitem = true;
-            foreach(var item in seatArray)
+            foreach (var item in seatArray)
             {
                 int itemNumber = Int32.Parse(item.ToString());
 

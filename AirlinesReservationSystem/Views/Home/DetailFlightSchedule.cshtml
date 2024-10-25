@@ -8,6 +8,25 @@
     int rows = 4; // Số hàng
     int cols = totalSeats / rows; // Số cột
 }
+<style>
+    #customAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f44336;
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        z-index: 1000;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<div id="customAlert">
+    Đây là thông báo sẽ tự động tắt sau 2 giây.
+</div>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title"><img src="~/Asset/logo.png" style="height:50px"><span>HN_PQ_200_@DateTimeOffset.Now.ToUnixTimeSeconds()</span></h4>
@@ -71,7 +90,7 @@
                             }
                         }
                     </tr>
-}
+                }
             </tbody>
         </table> }
     else
@@ -96,13 +115,12 @@
 
     <div class="text-center">
         <button class="btn btn-warning" data-id="@Model.id" style="padding: 10px 50px;"><i class="fa fa-usd" aria-hidden="true"></i> Đặt </button>
-       
+
     </div>
 </div>
 <div class="modal-footer">
     <p class="text-center"><b>Note:</b> You must be at the airport 30 minutes before departure time</p>
 </div>
-
 
 
 
@@ -138,7 +156,7 @@
             console.log(selectedSeats);
             //alert('dang bo');
         }
-        
+
     }
 
 
@@ -164,12 +182,24 @@
                     if (response.status == "200") {
                         window.location.href = "@Url.Action("PayYourTicket", "Home")";
                     } else {
-                        alert(response.message);
+                        showCustomAlert(response.message);
                     }
                 }
             });
         });
 
+
+    function showCustomAlert(message) {
+        // Hiển thị custom alert
+        let alertBox = document.getElementById("customAlert");
+        alertBox.innerText = message;
+        alertBox.style.display = "block";
+
+        // Ẩn custom alert sau 2 giây
+        setTimeout(function () {
+            alertBox.style.display = "none";
+        }, 2000);
+    }
 
 
 
@@ -187,4 +217,4 @@
 
 
 
-    </script>
+</script>
