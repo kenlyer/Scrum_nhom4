@@ -1,80 +1,200 @@
 ﻿@model AirlinesReservationSystem.Models.TicketManager
+@using AirlinesReservationSystem.Models
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
 }
-
-<h2>Edit</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>TicketManager</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    @Html.HiddenFor(model => model.id)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.flight_schedules_id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("flight_schedules_id", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.flight_schedules_id, "", new { @class = "text-danger" })
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header">
+            <b style="font-size:1.4rem">@ViewBag.Title</b>
+            <a href="@Url.Action("Index")" class="btn btn-secondary pull-right">< Quay lại</a>
         </div>
-    </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.user_id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-horizontal">
+                    <h4>TicketManager</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    @Html.HiddenFor(model => model.id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.code, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.flight_schedules_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("flight_schedules_id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.flight_schedules_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    @*seat location*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.seat_location, "seat_location", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBox("seat_location", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.user_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })<br />
 
-    @*pay_id*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.pay_id, "pay_id", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBox("pay_id", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                            <input id="browserInput" class="form-control" placeholder="Searh name or phone number..." value="">
+                            @*<input list="browsers" id="browserInput" class="form-control" value="@Model.user_id"><br>
+                                <input name="user_id" id="user_id" type="number" value="@Model.user_id" readonly required />
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+                                <datalist id="browsers" onclick="handleStatusChange(this) ">
+                                    @foreach (var user in ViewBag.user_id)
+                                    {
+                                        <option value="@user.Text" id="@user.Value">@user.Value</option>
+                                    }
+                                </datalist>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.code, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*seat location*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.seat_location, "seat_location", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBox("seat_location", null, htmlAttributes: new { @class = "form-control", @Readonly = "readonly", @type = "number", @min = "1", @max = "30" })
+                            @Html.ValidationMessageFor(model => model.seat_location, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*pay_id*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.pay_id, "pay_id", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5">
+                            @Html.DropDownList("pay_id", null, htmlAttributes: new { @class = "form-control", @id = "pay_id" })
+                            @Html.ValidationMessageFor(model => model.pay_id, "", new { @class = "text-danger" })<br />
+
+                            <input id="browserInputPay" class="form-control" placeholder="Searh id or name or PayID..." value=""><br />
+                            <label>Null PayID</label>
+                            <input type="checkbox" id="browserInputPayNullOption" onclick="check(this)" />
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
-}
+<script>
+    // Gắn sự kiện 'input' cho thẻ input
+    document.getElementById("browserInput").addEventListener("input", function () {
+         $.ajax({
+            url: '@Url.Action("GetUserOptions", "TicketManagers")',
+             type: 'GET',
+             data: {
+                 searchValue: this.value,
+             },
+             success: function (response) {
+                 var selectedValue = $('#user_id').val();
+                // Xóa các tùy chọn cũ của thẻ select
+                 $('#user_id option').not(':selected').remove();
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                // Thêm tùy chọn mới dựa trên dữ liệu nhận được
+                 $.each(response, function (index, user) {
+                     if (user.id != selectedValue) {
+                         $('#user_id').append(
+                             $('<option></option>').val(user.id).text(user.name + " - " + user.phone_number )
+                         );
+                     }
+                });
+            },
+            error: function () {
+                alert("Có lỗi xảy ra khi tải dữ liệu.");
+            }
+        });
+    });
+</script>
+<script>
+    var browserInputPay = document.getElementById("browserInputPay");
+    var pay_id = document.getElementById("pay_id");
+
+    function check(me) {
+        if (me.checked == true) {
+            $('#pay_id option').remove();
+            browserInputPay.readOnly = true;
+        }
+        else {
+            browserInputPay.readOnly = false;
+            $.ajax({
+            url: '@Url.Action("GetUserOptionsPay", "TicketManagers")',
+             type: 'GET',
+             data: {
+                 searchValue: this.value,
+             },
+             success: function (response) {
+                 var selectedValue = $('#pay_id').val();
+
+                // Xóa các tùy chọn cũ của thẻ select
+                 $('#pay_id option').not(':selected').remove();
+
+                // Thêm tùy chọn mới dựa trên dữ liệu nhận được
+                 $.each(response, function (index, user) {
+                     if (user.id != selectedValue) {
+                         $('#pay_id').append(
+                             $('<option></option>').val(user.id).text(user.id + "-" + user.name_Payment + "-" + user.PayerID_Payment )
+                         );
+                     }
+                });
+            },
+            error: function () {
+                alert("Có lỗi xảy ra khi tải dữ liệu.");
+            }
+        });
+        }
+    }
+
+
+    document.getElementById("browserInputPay").addEventListener("input", function () {
+         $.ajax({
+            url: '@Url.Action("GetUserOptionsPay", "TicketManagers")',
+             type: 'GET',
+             data: {
+                 searchValue: this.value,
+             },
+             success: function (response) {
+                 var selectedValue = $('#pay_id').val();
+
+                // Xóa các tùy chọn cũ của thẻ select
+                 $('#pay_id option').not(':selected').remove();
+
+                // Thêm tùy chọn mới dựa trên dữ liệu nhận được
+                 $.each(response, function (index, user) {
+                     if (user.id != selectedValue) {
+                         $('#pay_id').append(
+                             $('<option></option>').val(user.id).text(user.id + "-" + user.name_Payment + "-" + user.PayerID_Payment )
+                         );
+                     }
+                });
+            },
+            error: function () {
+                alert("Có lỗi xảy ra khi tải dữ liệu.");
+            }
+        });
+    });
+
+</script>

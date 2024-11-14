@@ -19,8 +19,9 @@ namespace AirlinesReservationSystem.Models
         public virtual DbSet<TicketManager> TicketManagers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Seats> Seats { get; set; }
-
         public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<Baggage> Baggage { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AirPort>()
@@ -53,7 +54,13 @@ namespace AirlinesReservationSystem.Models
                 .HasForeignKey(e => e.user_id)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Seats>()
+            .Property(s => s.Version)
+            .IsRowVersion();
 
+            modelBuilder.Entity<Seats>()
+           .Property(s => s.isbooked)
+           .IsConcurrencyToken();
 
         }
     }

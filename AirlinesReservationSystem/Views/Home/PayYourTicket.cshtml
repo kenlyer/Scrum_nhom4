@@ -6,9 +6,11 @@
 }
 
 
+
 <div class="container">
     <div class="panel panel-default" style="margin-top:30px">
         <div class="panel-heading" style="text-align:center"><h2>Vé của tôi</h2></div>
+        <div class="panel-heading" style="text-align:center"><span>Thời gian để đặt vé : </span> <span id="TimeMinute"></span><span> phút</span> <span>: </span><span id="TimeSecond"></span><span> giây</span></div>
         <div class="panel-body">
             <table class="table">
                 <tr>
@@ -48,13 +50,20 @@
                 }
 
             </table>
-            
+
         </div>
 
     </div>
 </div>
 <div style="text-align: center; margin-bottom:2px">
-    <a style="text-align:center" class="btn btn-success" href="/Home/PaymentWithPaypal">Thanh toán</a>
+    @if ((bool)Session["PaymentButton"])
+    {
+        <a id="payment-button" style="text-align:center" class="btn btn-success" href="/Home/PaymentWithPaypal">Thanh toán</a>
+    }
+    else
+    {
+        <a id="payment-button" style="text-align:center" class="btn btn-danger" href="@Url.Action("Index")">Hết thời gian để thanh toán.</a>
+    }
 </div>
 <div id="detailTickModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -64,3 +73,48 @@
 </div>
 
 
+<script>
+    let intervalID;
+    var url = "@Url.Action("FetchData", "Home")";
+    var MinOutput = document.getElementById("TimeMinute");
+    var SecOutput = document.getElementById("TimeSecond");
+
+    // Lấy thẻ <a> hiện tại
+    var oldButton = document.getElementById("payment-button");
+
+    // Tạo thẻ mới (ví dụ: thẻ <button>)
+    var newButton = document.createElement("a");
+    newButton.className = "btn btn-danger"; // Thay đổi class nếu cần
+    newButton.innerText = "Hết thời gian để thanh toán."; // Nội dung của nút mới
+    newButton.href = "@Url.Action("Index")";
+
+    function fetchData() {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Giả sử bạn nhận được JSON từ server
+            })
+            .then(data => {
+
+                MinOutput.innerText = data.Minutes;
+                SecOutput.innerText = data.Seconds;
+                if (data.Minutes == data.Seconds) {
+                    oldButton.parentNode.replaceChild(newButton, oldButton);
+                    clearInterval(intervalID);
+                    intervalID = null; // Đặt lại ID về null sau khi dừng
+                }
+                //console.log(data); // Xử lý dữ liệu nhận được từ server
+            })
+            .catch(error => {
+                //console.error('Fetch error:', error);
+            });
+    }
+
+    // Thiết lập để gọi hàm fetchData mỗi giây (1000 milliseconds)
+    if (!intervalID) { // Chỉ khởi động nếu chưa có interval
+        intervalID = setInterval(fetchData, 500);
+    }
+
+</script>

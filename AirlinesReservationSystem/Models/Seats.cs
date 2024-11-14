@@ -20,7 +20,13 @@ namespace AirlinesReservationSystem.Models
         public string seat { get; set; }
 
         [DisplayName("trạng thái")]
+        [ConcurrencyCheck]
         public int? isbooked { get; set; }
 
+        [Timestamp]
+        public byte[] Version { get; set; }
+
+        [DisplayName("thời gian giữ chỗ")]
+        public DateTime? BookingExpiration { get; set; }
     }
 }

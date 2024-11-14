@@ -1,0 +1,19 @@
+﻿@model AirlinesReservationSystem.Models.TicketManager
+@using AirlinesReservationSystem.Models
+
+@{
+    ViewBag.Title = "RefundView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="height:50vh">
+    <div class="card container w-50 h-100 text-center d-flex">
+        <div style="padding:8%;">
+            <div class="fw-bold" style="font-size:30px">THANH TOÁN BỊ THẤT BẠI DO HẾT THỜI GIAN</div>
+            <div style="font-size:100px"><i class="fa-solid fa-circle-check" style="color: #0b936a;"></i></div>
+            <div class="fw-bold">Thông báo bạn đã thanh toán tiền vé thất bại</div>
+            <div><a class="btn btn-success w-25 mt-2" href="@Url.Action("YourTicket","Home")">Xem Lịch Sử Đặt Vé</a></div>
+        </div>
+    </div>
+</div>
+

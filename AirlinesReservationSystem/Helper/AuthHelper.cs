@@ -13,6 +13,10 @@ namespace AirlinesReservationSystem.Helper
         {
             HttpContext.Current.Session["loginSesstion"] = user;
         }
+        public static void setIdentityEmployee(User user)
+        {
+            HttpContext.Current.Session["loginSesstionEmployee"] = user;
+        }
         public static User getIdentity1()
         {
             try
@@ -22,8 +26,20 @@ namespace AirlinesReservationSystem.Helper
                     User session = (User)HttpContext.Current.Session["loginSesstion"];
                     return session;
                 }
-
-
+            }
+            catch
+            { }
+            return null;
+        }
+        public static User getIdentityEmployeee()
+        {
+            try
+            {
+                if (isAdmin((User)HttpContext.Current.Session["loginSesstionEmployee"]) == true)
+                {
+                    User session = (User)HttpContext.Current.Session["loginSesstionEmployee"];
+                    return session;
+                }
             }
             catch
             { }
@@ -33,12 +49,8 @@ namespace AirlinesReservationSystem.Helper
         {
             try
             {
-               
-                    User session = (User)HttpContext.Current.Session["loginSesstion"];
-                    return session;
-              
-
-               
+                User session = (User)HttpContext.Current.Session["loginSesstion"];
+                return session;
             }
             catch
             { }
@@ -49,7 +61,10 @@ namespace AirlinesReservationSystem.Helper
         {
             HttpContext.Current.Session["loginSesstion"] = null;
         }
-
+        public static void removeIdentityEmployee()
+        {
+            HttpContext.Current.Session["loginSesstionEmployee"] = null;
+        }
         public static bool isLogin()
         {
             if (HttpContext.Current.Session["loginSesstion"] == null)
@@ -58,11 +73,23 @@ namespace AirlinesReservationSystem.Helper
             }
             return true;
         }
-
+        public static bool isLoginEmployeee()
+        {
+            if (HttpContext.Current.Session["loginSesstionEmployee"] == null)
+            {
+                return false;
+            }
+            return true;
+        }
         //Kiểm tra user đang đăng nhập có quyền admin hay không.
         //user.quyen == 0
         public static bool isAdmin(User user)
         {
+            if (user == null)
+            {
+                return false;
+            }
+
             if (user.user_type == 0)
             {
                 return true;

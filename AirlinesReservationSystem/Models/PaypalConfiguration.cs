@@ -11,6 +11,8 @@ namespace AirlinesReservationSystem.Models
         //Variables for storing the clientID and clientSecret key  
         public readonly static string ClientId;
         public readonly static string ClientSecret;
+        public static string Mode { get; set; }
+
         //Constructor  
         static PaypalConfiguration()
         {

@@ -14,7 +14,15 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
     public class FlightSchedulesController : Controller
     {
         private Model1 db = new Model1();
-
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            if (AuthHelper.getIdentityEmployeee() == null)
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new System.Web.Routing.RouteValueDictionary(new { Controller = "Security", Action = "Login" }));
+            }
+            base.OnActionExecuted(filterContext);
+        }
         //Hàm này trả về một View chứa danh sách tất cả các lịch trình chuyến bay hiện có trong cơ sở dữ liệu. Nó bao gồm thông tin về sân bay xuất phát, sân bay đích và máy bay dùng trong mỗi lịch trình chuyến bay.
         // GET: Admin/FlightSchedules
         public ActionResult Index()

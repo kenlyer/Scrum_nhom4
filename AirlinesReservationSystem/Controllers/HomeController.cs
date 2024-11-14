@@ -14,6 +14,9 @@ using PayPal.Api;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
+using Hangfire;
+using System.Data.SqlClient;
 
 namespace AirlinesReservationSystem.Controllers
 {
@@ -21,6 +24,9 @@ namespace AirlinesReservationSystem.Controllers
     {
         private Model1 db = new Model1();
         private readonly string apiUrl = "https://localhost:44371/api/";
+
+      
+
         Uri baseAddress = new Uri("https://localhost:44371/api/");
         private readonly HttpClient _client;
         public HomeController()
@@ -29,6 +35,93 @@ namespace AirlinesReservationSystem.Controllers
             _client.BaseAddress = baseAddress;
 
         }
+        public async Task RunWithSeconds()
+        {
+            for (int i = 0; i < 60; i++) // 60 lần mỗi 1 giây trong 1 phút
+            {
+                List<Seats> ListIsbookingExpiration = db.Seats.Where(x => x.isbooked == 1 && x.BookingExpiration != null && x.BookingExpiration <= DateTime.Now).ToList();
+                try
+                {
+                    foreach (var item in ListIsbookingExpiration)
+                    {
+                        item.isbooked = 0;
+                        item.BookingExpiration = null;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                await Task.Delay(TimeSpan.FromSeconds(1)); // Chờ 10 giây trước khi lặp lại
+            }
+        }
+        public async Task<ActionResult> RunScheduleMethods()
+        {
+            List<Seats> ListIsbookingExpiration = db.Seats.Where(x => x.isbooked == 1 && x.BookingExpiration != null && x.BookingExpiration <= DateTime.Now).ToList();
+            try
+            {
+                foreach(var item in ListIsbookingExpiration)
+                {
+                    item.isbooked = 0;
+                    item.BookingExpiration = null;
+                    db.Entry(item).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+        [HttpGet]
+        public ActionResult FetchData()
+        {
+            List<TicketManager> itemsTicket = Session["lstTicket"] as List<TicketManager>;
+            Session["lstTicket"] = itemsTicket;
+            TimeSpan timeRemaining;
+            DateTime currentTime = DateTime.Now;
+            int minutes = 0;
+            int seconds = 0;
+
+            if (itemsTicket != null)
+            {
+                foreach (var item in itemsTicket)
+                {
+                    Seats flagSeat = db.Seats.FirstOrDefault(x => x.flight_schedules_id == item.flight_schedules_id && x.seat == item.seat_location.ToString() && x.BookingExpiration != null);
+                    if (flagSeat != null)
+                    {
+                        timeRemaining = (TimeSpan)(flagSeat.BookingExpiration - currentTime);
+                        minutes = (int)timeRemaining.TotalMinutes; // Tổng số phút
+                        seconds = timeRemaining.Seconds; // Số giây còn lại
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+            }
+            RunScheduleMethods();
+
+            // Logic để lấy dữ liệu, ví dụ:
+            var data = new
+            {
+                Minutes = minutes,
+                Seconds = seconds,
+                Message = "Hello, this is a response from the server!",
+                Time = DateTime.UtcNow
+            };
+
+            // Trả về dữ liệu dưới dạng JSON
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
 
         [HttpGet]
@@ -138,7 +231,7 @@ namespace AirlinesReservationSystem.Controllers
                     client.BaseAddress = new Uri(apiUrl);
 
 
-                    var responses = client.GetAsync($"FlightSchedules/DetailFlightSchedule/{id}").Result;
+                    var responses = client.GetAsync($"FlightSchedules/getScheduleByID/{id}").Result;
 
                     if (responses.IsSuccessStatusCode)
                     {
@@ -206,12 +299,12 @@ namespace AirlinesReservationSystem.Controllers
                 response["message"] = "Bạn phải mua ít nhất 1 vé.";
                 return Content(JsonConvert.SerializeObject(response));
             }
-            if (checkticket == false)
-            {
-                response["status"] = "400";
-                response["message"] = "Chỗ ngồi bạn đặt đã có người đặt rồi.";
-                return Content(JsonConvert.SerializeObject(response));
-            }
+            //if (checkticket == false)
+            //{
+            //    response["status"] = "400";
+            //    response["message"] = "Chỗ ngồi bạn đặt đã có người đặt rồi.";
+            //    return Content(JsonConvert.SerializeObject(response));
+            //}
 
 
             for (int i = 0; i < amount; i++)
@@ -225,17 +318,101 @@ namespace AirlinesReservationSystem.Controllers
 
                 lstTicket.Add(ticket);
 
-                if (ModelState.IsValid)
+                //if (ModelState.IsValid)
+                //{//sử lý set chỗ ngồi là true rồi sau đó thanh toán 
+
+                   
+                //    //db.TicketManagers.Add(ticket);
+                //    //db.SaveChanges();
+                //    }
+                //else
+                //{
+                //    AlertHelper.setToast("danger", "Đặt vé không thành công.");
+                //}
+            }
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                // Thiết lập thời gian hết hạn cho tất cả các chỗ ngồi
+                DateTime expirationTime = DateTime.Now.AddMinutes(2);
+                try
                 {
-                    //db.TicketManagers.Add(ticket);
-                    //db.SaveChanges();
+                    foreach (var item in lstTicket)
+                    {
+                        // Tìm kiếm ghế cần đặt
+                        Seats seat = db.Seats.FirstOrDefault(x =>
+                            x.flight_schedules_id == item.flight_schedules_id &&
+                            x.seat == item.seat_location.ToString()  && x.isbooked == 0);
+                        if (seat != null)
+                        {
+                            seat.isbooked = 1;
+                            seat.BookingExpiration = expirationTime;   
+                            db.Entry(seat).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            response["status"] = "400";
+                            response["message"] = "1 trong chỗ ngồi bạn đặt đã có người đặt rồi.";
+                            return Content(JsonConvert.SerializeObject(response));
+                        }
+                    }
+
+                    // Gọi SaveChanges một lần cho tất cả các ghế đã cập nhật
+                    db.SaveChanges();
+
+                    // Nếu SaveChanges thành công, commit giao dịch
+                    transaction.Commit();
                 }
-                else
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    AlertHelper.setToast("danger", "Đặt vé không thành công.");
+                    // Xử lý khi có xung đột đồng thời (có ghế đã bị thay đổi)
+                    transaction.Rollback();
+
+                    // Lấy danh sách các mục bị xung đột
+                    //foreach (var entry in ex.Entries)
+                    //{
+                    //    var databaseValues = entry.GetDatabaseValues();
+                    //    if (databaseValues != null)
+                    //    {
+                    //        var dbSeat = (Seats)databaseValues.ToObject();
+
+                    //        // Xử lý xung đột theo yêu cầu của bạn, ví dụ: thông báo lỗi
+                    //        Console.WriteLine($"Ghế {dbSeat.seat} đã được đặt bởi người khác.");
+                    //    }
+                    //}
+
+                    // Xử lý thêm nếu cần, ví dụ: thông báo người dùng hoặc ghi log
+                    response["status"] = "400";
+                    response["message"] = "Chỗ ngồi bạn đặt đã có người đặt rồi.";
+                    return Content(JsonConvert.SerializeObject(response));
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    // Xử lý ngoại lệ khác nếu có
                 }
             }
 
+            //try
+            //{
+            //    foreach (var item in lstTicket)
+            //    {
+            //        //updated seat 
+            //        Seats seat = db.Seats.FirstOrDefault(x => (x.flight_schedules_id == item.flight_schedules_id && x.seat == item.seat_location.ToString()));
+            //        if (seat != null)
+            //        {
+            //            seat.isbooked = 1;
+            //            db.SaveChanges();
+            //            db.Entry(seat).State = EntityState.Modified;
+            //        }
+            //    }
+            //     // Gọi SaveChanges ở đây
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    response["status"] = "400";
+            //    response["message"] = "Chỗ ngồi bạn đặt đã có người đặt rồi chức năng mới.";
+            //    return Content(JsonConvert.SerializeObject(response));
+            //}
             Session["lstTicket"] = lstTicket;
             Session["amountTicket"] = amountTicket;
             Session["amountTicketSingle"] = amountTicketSingle;
@@ -289,12 +466,41 @@ namespace AirlinesReservationSystem.Controllers
             {
                 return RedirectToAction("Index");
             }
+            
             User user = AuthHelper.getIdentity();
             IEnumerable<TicketManager> ticketManagers = Session["lstTicket"] as IEnumerable<TicketManager>;
+            if (ticketManagers == null)
+            {
+                return HttpNotFound("Không tìm thấy thông tin vé.");
+            }
             Session["lstTicket"] = ticketManagers;
-
+            Session["PaymentButton"] = CheckTicketSeats();
             return View(ticketManagers);
         }
+        public bool CheckTicketSeats()
+        {
+            List<TicketManager> itemsTicket = Session["lstTicket"] as List<TicketManager>;
+            Session["lstTicket"] = itemsTicket;
+            if (itemsTicket != null)
+            {
+                foreach (var item in itemsTicket)
+                {
+                    Seats flagSeat = db.Seats.FirstOrDefault(x => x.flight_schedules_id == item.flight_schedules_id && x.seat == item.seat_location.ToString() && x.BookingExpiration != null);
+                    if (flagSeat != null)
+                    {
+                        return true;
+                      
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            return false;
+        }
+
         public ActionResult YourTicket()
         {
             if (!AuthHelper.isLogin())
@@ -391,8 +597,37 @@ namespace AirlinesReservationSystem.Controllers
         }
         /// PAYPAL
         /// 
+        public bool CheckIfRecurringJobExists(string jobId)
+        {
+            using (var connection = new SqlConnection("Data Source=LAPTOP-BUNF0JHE\\SQLEXPRESS;Initial Catalog=SkyWaveAirlinesSystem;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework"))
+            {
+                connection.Open();
+                var command = new SqlCommand("SELECT COUNT(*) FROM [Hangfire].[Set] WHERE [Key] = 'recurring-jobs' AND [Value] LIKE @jobId", connection);
+                command.Parameters.AddWithValue("@jobId", $"%\"{jobId}\"%");
+
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+        public void UpdateNewSeatsTimeDown()
+        {
+
+        }
         public ActionResult PaymentWithPaypal(string Cancel = null)
         {
+            //string jobId = "CheckSeatsExpirationJob";
+            //if (!CheckIfRecurringJobExists(jobId))
+            //{
+            //    // Nếu công việc chưa tồn tại, lên lịch công việc định kỳ
+            //    RecurringJob.AddOrUpdate(jobId, () => RunScheduleMethodSchedule(), Cron.Minutely);
+            //}
+            //Dictionary<string, string> response = new Dictionary<string, string>();
+            //if (!CheckTicketSeats())
+            //{
+            //    response["status"] = "400";
+            //    response["message"] = "Hết thời gian để thanh toán.";
+            //    return Content(JsonConvert.SerializeObject(response));
+            //}
             Payments payments = new Payments();
             //getting the apiContext  
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
@@ -443,10 +678,20 @@ namespace AirlinesReservationSystem.Controllers
                     }
 
                     //create payments 
+
                     payments.email_Payment = executedPayment.payer.payer_info.email;
                     payments.name_Payment = executedPayment.payer.payer_info.first_name + " " + executedPayment.payer.payer_info.last_name;
                     payments.PayerID_Payment = executedPayment.transactions[0].related_resources[0].sale.id;
+                    Session["SaleId"] = payments.PayerID_Payment;
                     payments.UserID = AuthHelper.getIdentity().id;
+
+                    if(CheckTicketSeats () == false)
+                    {
+                        InitiateRefund();
+                        return RedirectToAction("Refund", "Home");
+                        
+                    }
+
 
                 }
             }
@@ -456,15 +701,12 @@ namespace AirlinesReservationSystem.Controllers
             }
             //on successful payment, show success page to user.  
             List<TicketManager> itemsTicket = Session["lstTicket"] as List<TicketManager>;
-
+            //add payment
             db.Payments.Add(payments);
             db.SaveChanges();
-
             Payments payments1 = db.Payments.FirstOrDefault(x => x.email_Payment == payments.email_Payment && x.PayerID_Payment == payments.PayerID_Payment);
 
-
-
-
+            //add ticket
             foreach (var item in itemsTicket)
             {
                 item.pay_id = payments1.id;
@@ -472,10 +714,10 @@ namespace AirlinesReservationSystem.Controllers
                 //updated seat 
                 Seats seat = db.Seats.FirstOrDefault(x => (x.flight_schedules_id == item.flight_schedules_id && x.seat == item.seat_location.ToString()));
                 seat.isbooked = 1;
+                seat.BookingExpiration = null;
                 //update booked
                 FlightSchedule flight = db.FlightSchedules.FirstOrDefault(x =>  x.id == item.flight_schedules_id);
                 flight.bookedSeats += 1;
-
                 db.Entry(seat).State = EntityState.Modified;
                 db.Entry(flight).State = EntityState.Modified;
             }
@@ -484,9 +726,57 @@ namespace AirlinesReservationSystem.Controllers
 
             AlertHelper.setToast("success", "Đặt vé thành công.");
             //    return Content(JsonConvert.SerializeObject(response));
-
             return View("SuccessView");
         }
+
+        public ActionResult Refund()
+        {
+            return View();
+        }
+        //cancel Payment 
+        public ActionResult InitiateRefund()
+        {
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+            CreateRefundRequest(apiContext);
+            return View("Refund");
+        }
+
+
+        public void CreateRefundRequest(APIContext apiContext)
+        {
+            Sale CheckTheSale = new Sale();
+
+            DetailedRefund refundforreal = new DetailedRefund();
+            var saleId = Convert.ToString(Session["SaleId"]);
+
+            CheckTheSale = Sale.Get(apiContext, saleId);
+            string MaxAmountToRefund = CheckTheSale != null ? CheckTheSale.amount.total : "0";
+
+            Amount refundAmount = new Amount();
+            decimal NumericTotal = Convert.ToDecimal(MaxAmountToRefund) * 1;
+            refundAmount.total = NumericTotal.ToString();
+            string RefundCurrency = "USD";
+            refundAmount.currency = RefundCurrency;
+            RefundRequest refund = new RefundRequest();
+            refund.description = "Returned items.";
+            refund.reason = "Refund Demo";
+
+            refund.amount = refundAmount;
+            try
+            {
+                // Refund sale
+                refundforreal = Sale.Refund(apiContext, saleId, refund);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+
+
         public ActionResult SuccessView()
         {
             return View();

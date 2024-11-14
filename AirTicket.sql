@@ -269,7 +269,8 @@ ADD seat_location INT;
 alter table [dbo].[TicketManager]
 ADD pay_id Int;
 
----Seat table 
+---Seat table
+--////////////////////////////////////////////////////////////////////////////////////////
 Create table [dbo].[Seats](
 	[id] [int] IDENTITY(1,1) primary key NOT NULL,
 	[flight_schedules_id] [int] NOT NULL,
@@ -278,7 +279,17 @@ Create table [dbo].[Seats](
 )
 ALTER TABLE [dbo].[Seats]  WITH CHECK ADD  CONSTRAINT [FK_Seats_FlightSchedules] FOREIGN KEY([flight_schedules_id])
 REFERENCES [dbo].[FlightSchedules] ([id])
+
+ALTER TABLE [dbo].[Seats]  
+add  [Version] [Timestamp] 
+
+ALTER TABLE [dbo].[Seats]
+add [BookingExpiration] [DateTime]
+
+--////////////////////////////////////////////////////////////////////////////////////////
+
 ---Payment 
+--////////////////////////////////////////////////////////////////////////////////////////
 Create table [dbo].[Payments](
 	[id] [int] IDENTITY(1,1) primary key NOT NULL ,
 	[email_Payment] [nvarchar](255) NULL,
@@ -286,3 +297,59 @@ Create table [dbo].[Payments](
 	[PayerID_Payment] [nvarchar](255) NULL,
 	[UserID] [int] NULL
 )
+--////////////////////////////////////////////////////////////////////////////////////////
+
+select * from [dbo].[User] where email = N'string'
+
+select * from [dbo].[FlightSchedules] 
+
+select * from [dbo].[AirPort] 
+
+select * from [dbo].[Seats] 
+
+select * from [dbo].[Baggage] 
+
+---Baggage
+--////////////////////////////////////////////////////////////////////////////////////////
+Create table [dbo].[Baggage](
+	[id] [int] IDENTITY(1,1) primary key NOT NULL ,
+	[carryon_bag] [int] NOT NULL,
+	[signed_luggage] [int] NOT NULL,
+	[code] [nchar](255) NOT NULL,--giống với code của vé tương ứng với mỗi code  
+	[user_id] [int] NOT NULL,--foreign key to table User [id]
+)
+--alter Baggage link foreign key (user_id) to User (id)
+ALTER TABLE [dbo].[Baggage]  WITH CHECK ADD  CONSTRAINT [FK_Baggage_user_id] FOREIGN KEY([user_id]) REFERENCES [dbo].[User] ([id])
+
+Drop table [dbo].[Baggage]
+
+--////////////////////////////////////////////////////////////////////////////////////////
+
+---Role
+--////////////////////////////////////////////////////////////////////////////////////////
+Create table [dbo].[Role](
+	[id] [int] Identity(1,1) primary key NOT NULL,
+	[name_role] [nvarchar](255) NULL,
+	[status] [nvarchar](255) NULL
+)
+
+
+
+--////////////////////////////////////////////////////////////////////////////////////////
+select * from [dbo].[Seats] where flight_schedules_id = 16 and (seat = 5 or seat = 13 or seat = 29)
+
+Update  [dbo].[Seats]
+set isbooked = 1
+where flight_schedules_id = 16 and seat = 5 
+
+Update  [dbo].[Seats]
+set isbooked = 1
+where flight_schedules_id = 16 and seat = 13 
+
+Update  [dbo].[Seats]
+set isbooked = 0 , BookingExpiration = null
+where flight_schedules_id = 16 and seat = 5
+
+Update  [dbo].[Seats]
+set isbooked = 0
+where flight_schedules_id = 16 and seat = 13
