@@ -16,7 +16,7 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if (AuthHelper.getIdentity1() == null)
+            if (AuthHelper.getIdentityEmployeee() == null)
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new System.Web.Routing.RouteValueDictionary(new { Controller = "Security", Action = "Login" }));

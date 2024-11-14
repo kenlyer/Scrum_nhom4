@@ -12,45 +12,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Shortcut Icon" href="~/Asset/img/a1.png" type="img/x-icon" />
     <title>@ViewBag.Title - Bán vé máy bay</title>
+    <style>
+        .nav-item {
+            width: 110px;
+            text-align:center;
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+        }
+        .navbar-nav .nav-item:hover {
+            background-color: lightgray; /* Màu nền khi hover */
+        }
+        /* Định nghĩa màu chữ mặc định */
+        .navbar-nav .nav-link {
+            color: white ; /* Màu chữ mặc định */
+        }
+        /* Định nghĩa màu chữ khi hover */
+        .navbar-nav .nav-item:hover .nav-link {
+            color: black !important; /* Màu chữ khi hover */
+        }
+         /* Thêm hiệu ứng đổ bóng khi hover */
+        .navbar-nav .nav-item {
+            transition: box-shadow 0.5s ease; /* Thêm hiệu ứng chuyển tiếp */
+        }
+
+        .navbar-nav .nav-item:hover {
+            box-shadow: 6px 8px 10px rgba(0, 0, 0, 0.5); /* Đổ bóng khi hover */
+        }
+    </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: rgb(0 0 0 / 63%);">
         <a class="navbar-brand" href="#">
-            <img src="~/Asset/img/a1.png" style="width:50px" />
+            <img src="~/Asset/logo.png" style="width:80px ; height:100%" />
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item @{_active = _controller == "Default" ? "active" : ""; @_active}">
-                    <a class="nav-link" href="@Url.Action("Index","Default")">Bảng điều khiển <span class="sr-only">(current)</span></a>
+      
+        <div style="margin-left:0%" class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+                @*<li class="nav-item @{_active = _controller == "Default" ? "active" : ""; @_active}">
+            <a class="nav-link" href="@Url.Action("Index","Default")">Bảng điều khiển <span class="sr-only">(current)</span></a>
+        </li>*@
+                <li class="nav-item mr-3 @{_active = _controller == "UsersController" ? "active" : ""; @_active}">
+                    <a class="nav-link" title="Người dùng" href="@Url.Action("Index","Users")">Người dùng</a>
                 </li>
-                <li class="nav-item @{_active = _controller == "UsersController" ? "active" : ""; @_active}">
-                    <a class="nav-link" href="@Url.Action("Index","Users")">Khách hàng</a>
-                </li>
-
-
-                <li class="nav-item @{_active = _controller == "FlightSchedules" ? "active" : ""; @_active}">
-                    <a class="nav-link" href="@Url.Action("Index","FlightSchedules")">Chuyến bay</a>
+                <li class="nav-item mr-3 @{_active = _controller == "FlightSchedules" ? "active" : ""; @_active}">
+                    <a class="nav-link" title="Chuyến bay" href="@Url.Action("Index","FlightSchedules")">Chuyến bay</a>
                 </li>
 
-                <li class="nav-item @{_active = _controller == "TicketManagers" ? "active" : ""; @_active}">
-                    <a class="nav-link" href="@Url.Action("Index","TicketManagers")">Vé</a>
+                <li class="nav-item mr-3 @{_active = _controller == "TicketManagers" ? "active" : ""; @_active}">
+                    <a class="nav-link" title="Vé"  href="@Url.Action("Index","TicketManagers")">Vé</a>
                 </li>
-                <li class="nav-item @{_active = _controller == "Payments" ? "active" : ""; @_active}">
-                    <a class="nav-link" href="@Url.Action("Index","Payments")">Thanh Toán</a>
+                <li class="nav-item mr-3 @{_active = _controller == "Payments" ? "active" : ""; @_active}">
+                    <a class="nav-link" title="Thanh Toán" href="@Url.Action("Index","Payments")">Thanh Toán</a>
                 </li>
-                <li class="nav-item" ">
+                <li class="nav-item mr-3 @{_active = _controller == "Baggage" ? "active" : ""; @_active}">
+                    <a class="nav-link" title="Hành lý" href="@Url.Action("","")">Hành lý</a>
+                </li>
+
+                <li class="nav-item mr-3 ">
                     <a class="nav-link" href="@Url.Action("Logout","Default")">Đăng xuất</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div>
+    <div style="margin-top:20px">
         @Html.Raw(AlertHelper.showAlert())
         @RenderBody()
     </div>

@@ -14,7 +14,7 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
         // GET: Admin/Auth
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (AuthHelper.getIdentity1() == null)
+            if (AuthHelper.getIdentityEmployeee() == null)
             {
                 //Đây là một loại kết quả trả về từ một hành động của MVC. Nó chuyển hướng người dùng đến một tuyến đường (route) mới trong ứng dụng. Trong trường hợp này, nó chuyển hướng người dùng đến hành động Login trong SecurityController của khu vực Admin.
                 //filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden, "Forbidden");

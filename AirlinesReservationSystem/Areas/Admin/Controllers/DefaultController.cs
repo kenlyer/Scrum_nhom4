@@ -17,9 +17,9 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
 
         public ActionResult Logout()
         {
-            if (AuthHelper.isLogin() == true)
+            if (AuthHelper.isLoginEmployeee() == true)
             {
-                AuthHelper.removeIdentity();
+                AuthHelper.removeIdentityEmployee();
             }
             return RedirectToAction("Login", "Security");
         }

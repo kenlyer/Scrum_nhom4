@@ -19,6 +19,10 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
 
         public ActionResult Login()
         {
+            if (AuthHelper.isLoginEmployeee())
+            {
+                return RedirectToAction("Index", "FlightSchedules");
+            }
             return View();
         }
 
@@ -27,15 +31,15 @@ namespace AirlinesReservationSystem.Areas.Admin.Controllers
         public ActionResult Login(User _user)
         {
             var user = db.Users.Where(s => s.email == _user.email).SingleOrDefault();
-            if(user != null)
+            if (user != null)
             {
-                if(user.user_type == 1)
+                if (user.user_type == 1)
                 {
                     ModelState.AddModelError("email", "Bạn không phải admin");
                 }
-                else if(user.password == _user.password)
+                else if (user.password == _user.password)
                 {
-                    AuthHelper.setIdentity(user);
+                    AuthHelper.setIdentityEmployee(user);
                     return RedirectToAction("Index", "FlightSchedules");
                 }
                 else
